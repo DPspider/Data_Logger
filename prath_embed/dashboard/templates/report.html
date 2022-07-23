@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Report</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- Datatable CSS -->
+    <link href='https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
+    <link href='https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css' rel='stylesheet' type='text/css'>
+    <!-- jQuery Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Datatable JS -->
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+
+
+    
+    
+
+
+    <style>
+        html, body {
+          background:#ffffff;
+          margin: 0;
+
+        }
+
+    </style>
+
+</head>
+
+<body class="bg">
+
+    <div class="container">
+        <br>
+        <!-- Row to display image only -->
+        <div class="row"> 
+            <div class="col">
+                <img src="{{ company_data.company_image.url }}" class="img-fluid img-thumbnail" alt="{{ company_data.0.company_image.url }}">
+            </div>
+        </div><br>
+
+        <!-- Row to display batch name -->
+        <div class="row"> 
+            <h2 class="text-center text-uppercase"> Batch Report</h2>
+        </div><br>
+        
+        <!-- Row to display Date and address -->
+        <div class="row">
+          <div class="col-4">
+            Device Name : {{ device_data.device_name }} <br>
+            Date : 04/24/2022 <br>
+            Time : 12:47:13 <br>
+            Batch no : PV304 <br>
+          </div>
+          <div class="col-4">
+            
+          </div>
+          <div class="col-4 d-flex justify-content-end">
+            {{ company_data.address}}
+          </div>
+        </div><br>
+
+        <!-- Row to display table of parameters -->
+        <div class="row"> 
+            <div class="table-responsive">
+                
+                <!-- table-dark -->
+                <table class="table  table-hover table-bordered  " style="vertical-align: middle;" id="usertable">
+                    <thead class="">
+                    <tr>
+                        <th scope="col">Sr. No.</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Parameter 1</th>
+                        <th scope="col">Parameter 2</th>
+                        <th scope="col">Parameter 3</th>
+                        <th scope="col">Parameter 4</th>
+                        <th scope="col">Parameter 5</th>
+                        <th scope="col">Parameter 6</th>
+                        <th scope="col">Parameter 7</th>
+                        <th scope="col">Parameter 8</th>
+                        <th scope="col">Parameter 9</th>
+                        <th scope="col">Parameter 10</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for reading in device_readings %}
+                        <tr>
+                            <th scope="row">{{ reading.pk }}</th>
+                            <td>{{reading.date_field}}</td>
+                            <td>{{reading.time_field}}</td>
+                            <td>{{reading.parameter1}}</td>
+                            <td>{{reading.parameter2}}</td>
+                            <td>{{reading.parameter3}}</td>
+                            <td>{{reading.parameter4}}</td>
+                            <td>{{reading.parameter5}}</td>
+                            <td>{{reading.parameter6}}</td>
+                            <td>{{reading.parameter7}}</td>
+                            <td>{{reading.parameter8}}</td>
+                            <td>{{reading.parameter9}}</td>
+                            <td>{{reading.parameter10}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <br><br>
+        <button onclick="window.print()">Print this page</button>
+
+        <br><br><br>
+        {% for choice in choices %}
+        Question : {{ choice.question_id.question_text}}
+        <br>
+        Answer : {{ choice.choice_text}}
+        <br>
+        <!-- Image : <img src="{ choice.image.url }}" alt=""> -->
+        {% endfor %}
+
+      </div>
+        
+
+
+
+        <!-- <a href=" url 'jaro_admin_portal_app:student_details' s_id=student %}"><input type="button" value="Detail"></a> -->
+
+        <!-- <a href="{% url  }"><input type="button" value="Download Report"></a> -->
+        <!-- {% block content%}
+        {% endblock %} -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+        console.log("enter");
+        // Setup - add a text input to each footer cell
+
+
+        var table = $('#usertable').DataTable( {
+            orderCellsTop: true,
+            "bLengthChange": false,
+            dom: 'Bfrtip',
+                buttons: [
+                        'csv', 'excel', 'pdf'
+                ]
+        } );
+    } );
+    </script>
+</body>
+</html>

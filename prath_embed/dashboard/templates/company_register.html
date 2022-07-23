@@ -1,0 +1,56 @@
+<style>
+    
+</style>
+
+{% extends 'base.html' %}
+{% block head %}
+<title> Pratham Embedded Solutions </title>
+{% endblock %}
+
+
+{% block content %}
+<div class="container" style="margin-left: 86px;">
+    {% if error_message and error_message != 'iLearn Not registered' and error_message != "Not Eligible" %}
+    <p style='color:red'>{{ error_message }}</p>
+    {% endif %}
+    {% for message in messages %}
+    <div class="alert alert-success" style="color:red; font-weight:bolder;font-size:15px;" >
+        <a class="close" href="#" data-dismiss="alert">×</a>
+
+        {{ message }}
+        
+    </div>
+    {% endfor %}
+
+    <div class="card" style="width: 18rem;">
+        <form id="login_form" class="login_form" action="{% url 'dashboard:company_login' %}" method="post" autocomplete="off">
+            {% csrf_token %}
+        
+        <div class="card-body">
+            <h5 class="card-title">Company Portal </h5>
+            <p class="card-text">
+                <label for="Candidate ID" class="col-form-label col-form-label-sm ">Username </label>
+                    <input type="text" class="form-control form-control-sm" id="username" name="username" placeholder="Username" required>
+            </p>
+            <p class="card-text">
+                <label for="Password" class="col-form-label col-form-label-sm "> Password </label>        
+                <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="Password" required>
+            </p>
+            <p class="card-text">
+            <a href="{% url 'dashboard:password_reset' %}" style="color:#000; cursor: pointer;">
+                Forgot Password?
+            </a>
+            </p>
+            <p class="card-text">
+                <button class="sub_btn" type="submit" value="login">Login</button>
+            </p>
+        </div>
+    </div>
+    
+
+
+</div>
+{% endblock %}
+
+
+
