@@ -65,11 +65,11 @@ class Report(models.Model):
 class ProgrammableParameters(models.Model):
     created_at = models.DateTimeField(default=timezone.now, null=True)
     device_id =  models.ForeignKey(Devices, on_delete=models.CASCADE)
-    pparameter1 = models.DecimalField(max_digits=5, decimal_places=4)
-    pparameter2 = models.DecimalField(max_digits=5, decimal_places=4)
-    pparameter3 = models.DecimalField(max_digits=5, decimal_places=4)
-    parameter4 = models.DecimalField(max_digits=5, decimal_places=4)
-    pparameter5 = models.DecimalField(max_digits=5, decimal_places=4)
+    pparameter1 = models.DecimalField(max_digits=5, decimal_places=4, null=True, blank=True)
+    pparameter2 = models.DecimalField(max_digits=5, decimal_places=4, null=True, blank=True)
+    pparameter3 = models.DecimalField(max_digits=5, decimal_places=4, null=True, blank=True)
+    parameter4 = models.DecimalField(max_digits=5, decimal_places=4, null=True, blank=True)
+    pparameter5 = models.DecimalField(max_digits=5, decimal_places=4, null=True, blank=True)
 
     def __str__(self):
         return str(self.device_id)
