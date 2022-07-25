@@ -87,12 +87,26 @@ WSGI_APPLICATION = 'prath_embed.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#    'default': {
+#    'ENGINE': 'django.db.backends.mysql',
+#    'NAME': 'prath_embed',
+#    'USER': 'root',
+#    'PASSWORD': 'pratham@1234',
+#    'HOST': 'localhost',
+#    'PORT': '3306',
+#    'OPTIONS': {
+#    'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+#    }
+#    }
+# }
+
 DATABASES = {
    'default': {
    'ENGINE': 'django.db.backends.mysql',
    'NAME': 'prath_embed',
    'USER': 'root',
-   'PASSWORD': 'root123',
+   'PASSWORD': 'c5771b82a2b614cf021d0866e221084e9aa098a215b953bc',
    'HOST': 'localhost',
    'PORT': '3306',
    'OPTIONS': {
@@ -100,6 +114,7 @@ DATABASES = {
    }
    }
 }
+
 
 AUTH_USER_MODEL = 'dashboard.UserProfile'
 
